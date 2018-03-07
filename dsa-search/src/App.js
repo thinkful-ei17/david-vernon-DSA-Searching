@@ -19,12 +19,39 @@ class App extends Component {
     return;
   }
 
+  binarySearch(array, value) {
+    const sortedArr = array.sort((a, b) => a-b);
+    let counter = 1;
+    let start = 0;
+    let end = sortedArr.length -1;
+    let mid = Math.floor((start + end) / 2);
+    while(start !== end) {
+      if(sortedArr[mid] === value) {
+        console.log(`Found ${value} in ${counter} searches`);
+        return;
+      }
+      if(sortedArr[mid] > value) {
+        console.log('mid > value', sortedArr[mid]);
+        end = mid - 1;
+        counter++;
+      }
+      if(sortedArr[mid] < value) {
+        console.log('mid < value', sortedArr[mid]);
+        start = mid + 1;
+        counter++;
+      }
+      mid = Math.floor((start + end) / 2);
+    }
+    console.log(`After ${counter} searches, ${value} is not in this dataset`);
+    return;
+  }
+ 
   render() {
     return (
       <div className="App">
         <input ref={input => this.textInput = input} type='text' name='search-input'/>
         <button id='linear-button' onClick={()=> this.linearSearch(this.state.data, parseInt(this.textInput.value, 10))}>Linear</button>
-        <button id='binary-button'>Binary</button>
+        <button id='binary-button' onClick={()=> this.binarySearch(this.state.data, parseInt(this.textInput.value, 10))}>Binary</button>
       </div>
     );
   }
