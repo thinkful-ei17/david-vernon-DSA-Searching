@@ -29,18 +29,39 @@ B: 128  -> S: 97
 
 const arr = [200, 97, 121, 123, 98, 97, 105];
 
-let maxProfit = 0;
-for (index in arr) {
-  console.log(arr[index]);
-  for(let i = index; i < arr.length - 1 ;i++) {
-    let temp = arr[i] - arr[index];
+// let maxProfit = 0;
+// for (index in arr) {
+//   console.log(arr[index]);
+//   for(let i = index; i < arr.length - 1 ;i++) {
+//     let temp = arr[i] - arr[index];
 
-    if (temp > maxProfit) {
-      maxProfit = temp;
+//     if (temp > maxProfit) {
+//       maxProfit = temp;
+//     }
+
+//     console.log('nested for loop', arr[i]);
+//   }
+// }
+
+// console.log('MAXPROFIT', maxProfit);
+
+
+function hello(arr) {
+  let min = arr[0];
+  let max = arr[0];
+  let profit = 0;
+  for(let i=0; i<arr.length; i++) {
+    if(arr[i] < min) {
+      min = arr[i];
+      max = arr[i];
     }
-
-    console.log('nested for loop', arr[i]);
+    if(arr[i] > max) {
+      max = arr[i];
+    }
+    if(max - min > profit) {
+      profit = max - min;
+    }
   }
+  return profit;
 }
-
-console.log('MAXPROFIT', maxProfit);
+console.log(hello(arr));
